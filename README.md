@@ -41,12 +41,29 @@ Ce projet permet d'automatiser l'analyse de séquences génomiques à partir de 
 Pour lancer l'analyse complète à partir d'une URL de séquence (archive .gz), utilisez :
 
 ```bash
-# Donner les permissions d'exécution
-chmod +x *.sh *.py  
+    # Donner les permissions d'exécution
+    chmod +x *.sh *.py  
 
-# Exécuter le pipeline
-./occurrences.sh <URL_DU_FICHIER_GENBANK>
-
+    # Exécuter le pipeline
+    ./occurrences.sh <URL_DU_FICHIER_GENBANK>
+```
 
 ### Utilisation individuelle des scripts
-python3 bases2prot.py ma_sequence.gb
+```bash
+   # Traduire une séquence et obtenir les statistiques :
+    python3 bases2prot.py ma_sequence.gb
+
+   #Générer le graphique PDF :
+    python3 barplot.py fichier_stats.txt mon_graphique.pdf
+```
+
+### Exemple de Résultat
+Le pipeline produit :
+
+Une sortie textuelle dans le terminal listant les acides aminés et leurs occurrences.
+
+Un fichier fichier.pdf contenant un histogramme (barplot) des fréquences détectées.
+
+## Auteurs
+Mawuéna AHONDO
+Ahamed TCHATAKOURA
