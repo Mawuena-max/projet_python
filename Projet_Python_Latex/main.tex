@@ -1,0 +1,178 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{geometry}
+
+
+
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\title{\vspace{-2cm}Votre Titre}
+\date{\vspace{-5ex}}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Logo.png} 
+    \vspace{2cm}
+    
+    {\scshape\LARGE Université de Nantes \par}
+    \vspace{1cm}
+    
+    
+    \hrulefill \\
+    {\huge\bfseries \ XMS2IE700 Rapport de Projet : Analyse et Visualisation de Séquences Protéiques en Bioinformatique\par} % Titre du document
+    \vspace{0.5cm}
+    \hrulefill \\
+    
+    \vspace{2cm}
+    
+    {\Large\itshape \ Mawuéna AHONDO \& Ahamed TCHATAKOURA\par} 
+    \vfill
+    
+    {\large \ 14 Mars 2024\par} % Date
+
+    
+\end{titlepage}
+
+\newpage
+\vspace*{8cm}
+\begin{center}
+    \renewcommand{\contentsname}{Sommaire}
+    \tableofcontents 
+\end{center}
+
+\newpage
+\begin{center}
+    \section{Introduction}
+\end{center}
+
+
+Ce rapport présente les travaux pratiques réalisés  dans le cadre du cours M1 BIOINFO XMS2IE700 : language de sccript 2  à Nantes Université pour l'année universitaire 2023/2024.  Ce projet implique le développement d'un programme en Python pour l'analyse et la visualisation des séquences protéiques et a pour objectif de nous apprendre à d'automatiser le processus d'analyse de données biologiques pour permettre une interprétation rapide et visuelle des séquences protéiques, essentielle dans le domaine de la bioinformatique pour diverses applications, notamment l'étude des fonctions protéiques et la recherche biomédicale.
+
+\vspace{0.5cm}
+
+\section{Sujet du projet}
+Le projet consiste à développer un outil de programmation en  Python capable de télécharger, de décompresser si nécessaire un fichier GenBank, d'en extraire la première séquence protéique, de comptabiliser les occurrences des acides aminés et de générer un barplot des résultats ( des acides aminés) dans un fichier PDF. Le programme devra être robuste et gérer les fichiers compressés en .zip et .gz.
+
+
+
+\section{Structures de données }
+\textbf{Un dictionnaire } est utilisé pour stocker les correspondances entre les codons et les acides aminés. Chaque clé du dictionnaire représente un acide aminé et sa valeur est une liste de codons correspondants. Par exemple, la clé "Leu" a pour valeur une liste de codons correspondant à l'acide aminé Leucine.Nous avons utulisé une dictionnaire parceque :
+\begin{itemize}
+    \item c'est une structures de donnée efficace pour la recherche de correspondances entre des clés et des valeurs
+\end{itemize}
+\begin{itemize}
+    \item Il offre un accès rapide aux données en fonction de la clé
+\end{itemize}
+\begin{itemize}
+    \item Il permet de stocker des données de manière organisée et structurée
+\end{itemize}
+\textbf{Une Liste}  pour stocker les acides aminés extraits de la séquence traduite. Chaque acide aminé est ajouté à cette liste à partir de la séquence de protéine traduite.Une liste à été utulisé pour de diverses raisonsd à savoir :
+\begin{itemize}
+    \item c'est une structures de donnée efficace simple et flexible pour stocker une séquence ordonnée d'éléments
+\end{itemize}
+\begin{itemize}
+    \item Elle permet d'itérer facilement sur les éléments de la liste et de réaliser des opérations telles que le comptage d'éléments.
+\end{itemize}
+\begin{itemize}
+    \item adaptée pour stocker des données séquentielles sans clé.
+\end{itemize}
+
+\section{Algorithmes utilisés  }
+Dans le cadre de notre projet de bioinformatique, nous avons utilisé une série d'algorithmes et de scripts pour accomplir les tâches requises. Voici un résumé des composants clés de notre solution :
+
+\begin{itemize}
+    \item \textbf{Script Python pour extraire et traduire les séquences protéiques (bases2prot.py):}
+    \begin{itemize}
+    \item \textbf{Fonction extract\_first\_sequence:}   
+    \end{itemize}
+parcourt un fichier GenBank pour extraire la première séquence de nucléotides après l'entête "ORIGIN" et jusqu'à la terminaison "//". La séquence est nettoyée des espaces et des chiffres pour ne conserver que les nucléotides.
+    \begin{itemize}
+    \item \textbf{Fonctions transcription et traduction:}   
+    \end{itemize}
+convertissent la séquence d'ADN en ARN, puis en séquence peptidique, en utilisant le code génétique fourni. Des fonctions auxiliaires comme \textbf{codon\_to\_aa} et \textbf{get\_stat\_aa} sont utilisées pour convertir chaque codon en acide aminé et compter les occurrences.
+    \begin{itemize}
+    \item\textbf{Fonction affichage\_acides\_aminés\_statistiques:}   
+    \end{itemize}
+imprime sur la sortie standard les acides aminés et leurs occurrences formatées pour une utilisation ultérieure par barplot.py.
+\end{itemize}
+
+\newpage
+
+\begin{itemize}
+    \item \textbf{Script Python pour analyser les données et générer un barplot (barplot.py):}
+    \begin{itemize}
+    \item \textbf{Fonction parse\_input:}   
+    \end{itemize}
+extrait les données de occurrences des acides aminés à partir d'un fichier donné, en vérifiant que le fichier est bien formaté et en stockant les données dans un dictionnaire pour un accès rapide et facile.
+    \begin{itemize}
+    \item \textbf{Fonction generate\_barplot:}   
+    \end{itemize}
+utilise la bibliothèque matplotlib pour créer un barplot des données d'occurrences des acides aminés. Le graphique est ensuite sauvegardé dans un fichier PDF. Cette approche a été choisie pour sa simplicité et son efficacité pour produire des visualisations de données.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Script Bash pour le téléchargement et la décompression de fichiers (occurrences.sh):}
+\end{itemize}
+fait usage des commandes wget ou curl pour télécharger le fichier depuis une URL donnée.
+Utilise un script de décompression (\textbf{decompression.sh}) personnalisé pour gérer les fichiers .gz et .zip.
+Renomme et prépare le fichier décompressé pour l'analyse.
+
+\begin{itemize}
+    \item \textbf{Script Bash decompression:}
+\end{itemize}
+La fonction \textbf{decompress} identifie l'extension du fichier et applique la commande de décompression appropriée (gunzip pour .gz, unzip pour .zip).
+Retourne le nom du fichier décompressé pour un traitement ultérieur ou un code d'erreur en cas d'échec.
+
+\section{Difficultés rencontrées }
+\begin{itemize}
+    \item {Optimisation des temps de traitement pour les fichiers de grande taille et gestion des exceptions lors de la génération des PDF:}
+    \item Comment afficher les occurences et leurs nombres sous formes d'un tableau dans la fonction
+    Pour trouver une solution nous noous sommes basés sur l'intelligence artificiele dans la fonction qui affiche les acides aminés
+    \item Filtrer les caractères non standard dans la séquence lorsque le fichier genebank  contient des caractères non standart 
+    \item Comment gerer les codons incomplets ou non standard dans la séquence d'ARN dans la fonction Traduction, Nous avons la possibilé de choisir d'ignorer, remplacer ou traiter autrement ces codons . Nous avons donc choisit d'ignorer le codon s'il n'est pas valide
+    \item utulisation de l'intélligence  artificiell pour decompresser le fichier si necessaire
+\end{itemize}
+
+
+\section{Manuel d'utilisation }
+\begin{itemize}
+    \item \textbf{Pour exécuter le programme, utilisez la commande:}
+
+\texttt{python3 bases2prot.py <nom\_du\_fichier\_genbank>}
+\end{itemize}
+    
+
+\begin{itemize}
+    \item \textbf{Pour générer le barplot, utilisez:}
+    
+\texttt{python3 barplot.py <nom\_du\_fichier\_de\_séquences> <nom\_du\_fichier\_pdf>}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{pour automatiser le processus complet:}
+
+\texttt{/.occurrences.sh <lien de téléchargement du fichier Genbank>}
+\end{itemize}
+
+\newpage
+\begin{center}
+    \section{Conclusion}
+\end{center}
+En conclusion, ce projet de bioinformatique a été une opportunité riche et éducative pour développer un outil d'analyse et de visualisation de séquences protéiques. Grâce à ce travail, nous avons pu concevoir un programme  fonctionnel qui répond aux besoins spécifiques du domaine de la bioinformatique, en particulier dans le traitement et l'interprétation des séquences de protéines.
+Les défis rencontrés au cours du projet, qu'ils soient anticipés ou imprévus, nous ont permis d'affiner nos compétences en programmation et en résolution de problèmes. Bien que certaines restrictions demeurent, comme la gestion des séquences très longues ou des annotations complexes, les résultats obtenus sont prometteurs et ouvrent la voie à de futures améliorations et extensions du programme.
+Les compétences acquises en matière de structures de données, d'algorithmes de décompression et de parsing, ainsi qu'en visualisation de données avec matplotlib, sont des atouts qui nous seront bénéfiques bien au-delà de ce projet.Pour la réalisation du rapport du projet nous avons utulisé un language de balisage :\textbf{latex}
+
+Nous espérons que ce programme servira d'outil utile à la communauté de la bioinformatique et inspirera de futures recherches et développements dans ce domaine dynamique et en constante évolution. En définitive, ce projet n'est pas seulement une fin en soi, mais une étape importante dans notre parcours éducatif et professionnel.
+
+
+\end{document}
