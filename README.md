@@ -65,5 +65,6 @@ Une sortie textuelle dans le terminal listant les acides aminés et leurs occurr
 Un fichier fichier.pdf contenant un histogramme (barplot) des fréquences détectées.
 
 ## Auteurs
-Mawuéna AHONDO
+Mawuéna AHONDO 
+
 Ahamed TCHATAKOURA
