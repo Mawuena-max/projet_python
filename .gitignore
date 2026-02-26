@@ -1,0 +1,11 @@
+# --- Fichiers Système ---
+.DS_Store
+Thumbs.db
+
+# --- Sorties de scripts (PDF et images) ---
+*.pdf
+*.png
+
+# --- Dossiers temporaires ---
+__pycache__/
+.ipynb_checkpoints/
